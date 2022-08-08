@@ -17,7 +17,8 @@ Fully responsive and interactive blog site.
   <hr>
  <h3>Admin</h3>
  <p>There are various privilages reserved for Admin, such as editing, deleting and creating blog posts. Admin can also delete comments. This could in the future be changed to allow all
- registered users to make posts!</p>
+ registered users to make posts!
+ <a href="https://patty-blog.herokuapp.com/">Visit Blog</a></p>
     
    
 
