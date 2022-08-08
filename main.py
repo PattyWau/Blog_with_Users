@@ -129,7 +129,7 @@ def register():
 
         login_user(new_user)
 
-        return redirect(url_for('profile'))
+        return redirect(url_for('home'))
 
     return render_template("register.html", form=form, logged_in=current_user.is_authenticated)
 
@@ -151,7 +151,7 @@ def login():
 
         else:
             login_user(user)
-            return redirect(url_for('home'))
+            return redirect(url_for('profile'))
 
     return render_template("login.html", form=form, logged_in=current_user.is_authenticated)
 
