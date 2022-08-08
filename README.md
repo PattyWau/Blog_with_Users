@@ -15,8 +15,8 @@ Fully responsive and interactive blog site.
     <p>All visiters can use the fully functional form to send messages to the Owner of the website for whatever reason they see fit.</p>
     
   <hr>
- 
- <p>There are various privilages reserved for Admin, such as editing, deleting and creating blog posts. This could in the future be changed to allow all
+ <h3>Admin</h3>
+ <p>There are various privilages reserved for Admin, such as editing, deleting and creating blog posts. Admin can also delete comments. This could in the future be changed to allow all
  registered users to make posts!</p>
     
    
