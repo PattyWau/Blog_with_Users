@@ -1,4 +1,4 @@
-import functools, os
+import functools, os, smtplib
 import secrets
 import flask
 from flask import Flask, render_template, redirect, url_for, flash
@@ -16,7 +16,7 @@ from flask_gravatar import Gravatar
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 Base = declarative_base()
@@ -87,7 +87,7 @@ class Comment(db.Model):
     commenter = relationship('User', back_populates="comments")
 
 
-# db.create_all()
+db.create_all()
 
 
 @login_manager.user_loader
@@ -196,9 +196,21 @@ def about():
     return render_template("about.html", logged_in=current_user.is_authenticated)
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html", logged_in=current_user.is_authenticated)
+    if request.method == "POST":
+        data = request.form
+        message = f"Sender: {data['email']}\n{data['msg']}\nPhone:{data['phone']}\nName:{data['name']}"
+
+        with smtplib.SMTP("smtp.gmail.com") as connection:
+            connection.starttls()
+            connection.login(user=os.environ.get("MY_EMAIL"), password=os.environ.get("MY_PWD"))
+            connection.sendmail(from_addr=os.environ.get("MY_EMAIL"), to_addrs=os.environ.get("MY_EMAIL"),
+                                msg=f"Subject:New Message\n\n{message}")
+
+            return render_template('contact.html', msg_sent=True)
+
+    return render_template("contact.html", logged_in=current_user.is_authenticated, msg_sent=False)
 
 
 @app.route("/new-post", methods=["GET", "POST"])
