@@ -1,5 +1,4 @@
 import functools, os, smtplib
-import secrets
 import flask
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap
