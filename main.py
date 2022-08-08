@@ -16,7 +16,7 @@ from flask_gravatar import Gravatar
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = secrets.token_hex()
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 Base = declarative_base()
